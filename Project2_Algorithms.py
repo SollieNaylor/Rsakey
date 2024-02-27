@@ -66,7 +66,6 @@ def test_sorting_algorithm(sort_func, case):
         "average": lambda x: sorted(x),
         "worst": lambda x: sorted(x, reverse=True),
     }
-
     print(f"In {case} case,")
     for N in [100, 1000, 10000]:
         test_data = random.sample(range(N), N)
@@ -74,6 +73,19 @@ def test_sorting_algorithm(sort_func, case):
         sorted_data = sort_func(test_cases[case](test_data))
         elapsed_time = time.time() - start_time
         print(f"For N = {N}, it takes {elapsed_time:.6f} seconds")
+
+    print(f"In {case} case,")
+    while True:
+        input_choice = input("Do you want to input another N (Y/N)? ").lower()
+        if input_choice == 'n':
+            break
+
+        N_value = int(input("What is the N? "))
+        test_data = random.sample(range(N_value), N_value)
+        start_time = time.time()
+        sorted_data = sort_func(test_cases[case](test_data))
+        elapsed_time = time.time() - start_time
+        print(f"For N = {N_value}, it takes {elapsed_time:.6f} seconds")
 
 # Main program
 while True:
@@ -101,7 +113,7 @@ while True:
     elif algorithm_choice == 4:
         sorting_algorithm = shell_sort
     else:
-        print("Invalid choice. Please select a valid sorting algorithm.")
+        print("Please select a valid sorting algorithm.")
         continue
 
     while True:
